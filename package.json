@@ -1,0 +1,42 @@
+{
+  "name": "@rmw/dirtree",
+  "version": "0.0.3",
+  "repository": "https://github.com/rmw-lib/dirtree",
+  "author": "i@rmw.link",
+  "license": "MulanPSL-2.0",
+  "exports": {
+    "./dump": "./lib/dump.js",
+    "./load": "./lib/load.js",
+    "./": "./lib/"
+  },
+  "files": [
+    "/lib"
+  ],
+  "dependencies": {
+    "@rmw/console": "^0.0.10",
+    "@rmw/env": "^0.0.14",
+    "@rmw/merkle": "^0.0.3",
+    "at.property": "^0.0.14",
+    "blake3": "^2.1.4",
+    "bls-wasm": "^0.3.1",
+    "cppzst": "^2.0.7",
+    "fs-extra": "^9.0.1",
+    "ignore": "^5.1.8",
+    "msgpackr": "^0.5.3",
+    "urlsafe-base64": "^1.0.0"
+  },
+  "devDependencies": {
+    "@rmw/md-include": "^0.4.5",
+    "@rmw/thisfile": "^0.0.2",
+    "coffeescript": "^2.5.1",
+    "colortape": "^0.1.2",
+    "nodemon": "^2.0.6",
+    "source-map-support": "^0.5.19",
+    "tape": "^5.0.1",
+    "tape-catch": "^1.0.6"
+  },
+  "scripts": {
+    "prepare": "./.git/hooks/pre-commit && rm -rf lib && rsync -av --include='*/' --include='*.js' --include='*.mjs' --exclude=* src/ lib/ && npx coffee --compile --output lib src/"
+  },
+  "type": "module"
+}
