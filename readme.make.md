@@ -1,15 +1,15 @@
-# @rmw/dirtree
+# @rmw/fs
 
 ##  安装
 
 ```
-yarn add @rmw/dirtree
+yarn add @rmw/fs
 ```
 
 或者
 
 ```
-npm install @rmw/dirtree
+npm install @rmw/fs
 ```
 
 ## 使用

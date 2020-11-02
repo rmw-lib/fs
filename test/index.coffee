@@ -1,11 +1,11 @@
 #!/usr/bin/env coffee
-import dump from '@rmw/dirtree/dump'
-import load from '@rmw/dirtree/load'
+import dump from '@rmw/fs/dump'
+import load from '@rmw/fs/load'
 import fs from 'fs'
 import {thisdir} from '@rmw/thisfile'
 import {dirname} from 'path'
 import path from 'path'
-import Bls from '@rmw/dirtree/bls'
+import Bls from '@rmw/fs/bls'
 import os from 'os'
 
 do =>

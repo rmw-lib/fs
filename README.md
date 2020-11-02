@@ -1,30 +1,30 @@
 <!-- 本文件由 ./readme.make.md 自动生成，请不要直接修改此文件 -->
 
-# @rmw/dirtree
+# @rmw/fs
 
 ##  安装
 
 ```
-yarn add @rmw/dirtree
+yarn add @rmw/fs
 ```
 
 或者
 
 ```
-npm install @rmw/dirtree
+npm install @rmw/fs
 ```
 
 ## 使用
 
 ```coffee
 #!/usr/bin/env coffee
-import dump from '@rmw/dirtree/dump'
-import load from '@rmw/dirtree/load'
+import dump from '@rmw/fs/dump'
+import load from '@rmw/fs/load'
 import fs from 'fs'
 import {thisdir} from '@rmw/thisfile'
 import {dirname} from 'path'
 import path from 'path'
-import Bls from '@rmw/dirtree/bls'
+import Bls from '@rmw/fs/bls'
 import os from 'os'
 
 do =>

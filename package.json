@@ -1,7 +1,7 @@
 {
-  "name": "@rmw/dirtree",
+  "name": "@rmw/fs",
   "version": "0.0.3",
-  "repository": "https://github.com/rmw-lib/dirtree",
+  "repository": "https://github.com/rmw-lib/fs",
   "author": "i@rmw.link",
   "license": "MulanPSL-2.0",
   "exports": {
