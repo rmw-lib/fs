@@ -7,6 +7,8 @@
   "exports": {
     "./dump": "./lib/dump.js",
     "./load": "./lib/load.js",
+    "./const": "./lib/const.mjs",
+    "./b64path": "./lib/b64path.js",
     "./": "./lib/"
   },
   "files": [
