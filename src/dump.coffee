@@ -90,13 +90,15 @@ export default (dirpath, key)=>
 
   now = parseInt new Date()/1000
   nowbin = int2buf now
-  await fs.outputFile dir+"v.ts", nowbin
+
+  dir_meta = dir+"!/"
+  await fs.outputFile dir_meta+"v", nowbin
 
   f = (new Date(now*1000)).toISOString()[..18].replace(/-/g,'/').replace("T","/").replace(/:/g,".")
 
   # 签名长度48字节
   await fs.outputFile(
-    dir+"!/"+f
+    dir_meta+f
     Buffer.concat([
       vhash
       key.sign Buffer.concat [nowbin,vhash]
