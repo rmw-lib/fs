@@ -77,7 +77,20 @@ export default (dirpath, key)=>
   vhash = blake.hash v
   vb64 = b64path vhash
 
-  console.log DATA_V+pubhashpath+"/"+vb64
+  dir = DATA_V+pubhashpath+"/"
+  await fs.outputFile(
+    dir+vb64
+    v
+  )
+  pub = dir+"pub"
+
+  if not await fs.exists pub
+    await fs.outputFile pub, key.pubbin
+
+  now = parseInt new Date()/1000
+
+  # 签名长度48字节
+  console.log Buffer.concat([vhash, key.sign(vhash)]).length
 
   r
 

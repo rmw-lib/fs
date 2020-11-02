@@ -31,6 +31,9 @@ class Key
         BASE64.encode @pubhash
   )
 
+  sign: (buf)->
+    Buffer.from @_.sign(buf).serialize()
+
 export default (private_path)=>
   await Bls.init(Bls.BLS12_381)
 
