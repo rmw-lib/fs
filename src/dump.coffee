@@ -12,6 +12,9 @@ import b64path from './b64path'
 import int2buf from './int2buf'
 import BASE64 from 'urlsafe-base64'
 
+date2path = (now)=>
+  (new Date(now*1000)).toISOString()[..18].replace(/-/g,'/').replace("T","/").replace(/:/g,".")
+
 export dump = (dirpath, meta, ig)=>
   dirli = []
   fileli = []
@@ -92,18 +95,30 @@ export default (dirpath, key)=>
   nowbin = int2buf now
 
   dir_meta = dir+"!/"
-  await fs.outputFile dir_meta+"v", nowbin
 
-  f = (new Date(now*1000)).toISOString()[..18].replace(/-/g,'/').replace("T","/").replace(/:/g,".")
+  filev = dir_meta+"v"
 
-  # 签名长度48字节
-  await fs.outputFile(
-    dir_meta+f
-    Buffer.concat([
-      vhash
-      key.sign Buffer.concat [nowbin,vhash]
-    ])
-  )
+  if await fs.exists filev
+    pre = await fs.readFile(
+      dir_meta+date2path(
+        (await fs.readFile(filev)).readUIntBE(0,6)
+      )
+    )
+    has_diff = Buffer.compare(vhash,pre[...32])
+  else
+    has_diff = 1
+
+  if has_diff
+    await fs.outputFile filev, nowbin
+
+    # 签名长度48字节
+    await fs.outputFile(
+      dir_meta+date2path(now)
+      Buffer.concat([
+        vhash
+        key.sign Buffer.concat [nowbin,vhash]
+      ])
+    )
 
   r
 
