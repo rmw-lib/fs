@@ -9,7 +9,8 @@ import {compress} from 'cppzst'
 import Meta from './meta'
 import {DATA, CACHE} from './const.mjs'
 import b64path from './b64path'
-
+import int2buf from './int2buf'
+import BASE64 from 'urlsafe-base64'
 
 export dump = (dirpath, meta, ig)=>
   dirli = []
@@ -88,9 +89,19 @@ export default (dirpath, key)=>
     await fs.outputFile pub, key.pubbin
 
   now = parseInt new Date()/1000
+  nowbin = int2buf now
+  await fs.outputFile dir+"v.ts", nowbin
+
+  f = (new Date(now*1000)).toISOString()[..18].replace(/-/g,'/').replace("T","/").replace(/:/g,".")
 
   # 签名长度48字节
-  console.log Buffer.concat([vhash, key.sign(vhash)]).length
+  await fs.outputFile(
+    dir+"!/"+f
+    Buffer.concat([
+      vhash
+      key.sign Buffer.concat [nowbin,vhash]
+    ])
+  )
 
   r
 
